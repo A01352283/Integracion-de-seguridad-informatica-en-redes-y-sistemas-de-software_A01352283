@@ -1,0 +1,43 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+
+
+// Simple function component 
+function Greet(props){
+    console.log(props);
+    return (<h1>Hello {props.name}, you are {props.age} years old</h1>);
+}
+
+//Another version
+function GreetTwo({name, age}){
+    return (<h1>Hello {name}, you are {age} years old.</h1>);
+}
+
+class Goodbye extends React.Component{
+    constructor(props){
+        //Call the constructor of the parent class
+        super(props);
+        this.state = {
+            day: props.day,
+            month: props.month,
+            year: props.year,
+        };
+    }
+    
+    render(){
+        return (<h1>Bye {this.state.day}/{this.state.month}/{this.state.year}</h1>);
+    }
+}
+
+function App(){
+    return(
+        <div>
+            <GreetTwo name="Aa" age="1000"/>
+            <Greet name="Bb" age="987"/>
+            <Goodbye day={10} month="January" year={2000}/>
+        </div>);
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App/>);
