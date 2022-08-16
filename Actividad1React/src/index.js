@@ -1,21 +1,39 @@
+//Tutorial followed: https://reactjs.org/tutorial/tutorial.html
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
 
-class Square extends React.Component {
-    render() {
-      return (
-        <button className="square">
-          {/* TODO */}
-        </button>
-      );
-    }
-  }
+//Function component
+function Square(props){
+  return(
+    <button className="square" onClick={props.onClick}> 
+      {props.value}
+    </button> //Shows the value passed to the square in the parent Board component. Adds an OnClick event for the squares
+  );
+}
   
   class Board extends React.Component {
+    constructor(props){
+      super(props);
+      this.state = {
+        squares: Array(9).fill(null),
+      };
+    }
+
+    handleClick(i){
+      const squares = this.state.squares.slice(); //This creates a copy of the squares array in order to modify it.
+      squares[i] = 'X';
+      this.setState({squares: squares});
+    }
+
     renderSquare(i) {
-      return <Square />;
+      return (
+        <Square 
+          value={this.state.squares[i]} //Passes the state of each square
+          onClick={() => this.handleClick(i)} //The onclick prop is a function that Square can call when clicked
+        />
+      );
     }
   
     render() {
