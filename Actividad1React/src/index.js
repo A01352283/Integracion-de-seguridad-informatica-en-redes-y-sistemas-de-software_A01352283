@@ -14,34 +14,19 @@ function Square(props){
 }
   
   class Board extends React.Component {
-    constructor(props){
-      super(props);
-      this.state = {
-        squares: Array(9).fill(null),
-      };
-    }
-
-    handleClick(i){
-      const squares = this.state.squares.slice(); //This creates a copy of the squares array in order to modify it.
-      squares[i] = 'X';
-      this.setState({squares: squares});
-    }
 
     renderSquare(i) {
       return (
         <Square 
-          value={this.state.squares[i]} //Passes the state of each square
-          onClick={() => this.handleClick(i)} //The onclick prop is a function that Square can call when clicked
+          value={this.props.squares[i]} //Passes the state of each square
+          onClick={() => this.props.onClick(i)} //The onclick prop is a function that Square can call when clicked
         />
       );
     }
   
-    render() {
-      const status = 'Next player: X';
-  
+    render() {  
       return (
         <div>
-          <div className="status">{status}</div>
           <div className="board-row">
             {this.renderSquare(0)}
             {this.renderSquare(1)}
@@ -63,23 +48,104 @@ function Square(props){
   }
   
   class Game extends React.Component {
-    render() {
+    constructor(props) {
+      super(props);
+      this.state = {
+        history: [{
+          squares: Array(9).fill(null)
+        }],
+        stepNumber: 0,
+        xIsNext: true
+      };
+    }
+
+    jumpTo(step){ //Goes to the given state of the played game
+      this.setState({
+        stepNumber: step,
+        xIsNext: (step % 2) === 0,
+      });
+    }
+
+    handleClick(i){
+      const history = this.state.history.slice(0, this.state.stepNumber + 1);
+      const current = history[history.length - 1];
+      const squares = current.squares.slice(); //This creates a copy of the squares array in order to modify it.
+      if (calculateWinner(squares) || squares[i]){ //If someone has won the game, returns to ignore input
+        return;
+      }
+      squares[i] = this.state.xIsNext ? 'X' : 'O'; //Determines which mark to show, based on the player's turn
+      this.setState({
+        history: history.concat([{ //Concat doesn't mutate the original array
+          squares: squares,
+        }]),
+        stepNumber: history.length,
+        xIsNext: !this.state.xIsNext, //Flips the bool to indicate the next player
+      });
+    }
+
+    render() { //This uses the most recent history to determine and display the game's status
+      const history = this.state.history;
+      const current = history[this.state.stepNumber];
+      const winner = calculateWinner(current.squares);
+
+      const moves = history.map((step, move) => { //Move refers to the current history element index
+        const desc = move ?
+          'Go to move # ' + move:
+          'Go to game start';
+        return (
+          <li key={move}>
+            <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          </li>
+        );
+      });
+
+      let status;
+      if (winner){
+        status = 'Winner: ' + winner;
+      } else{
+        status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+      }
+
       return (
         <div className="game">
           <div className="game-board">
-            <Board />
+            <Board 
+              squares={current.squares}
+              onClick={(i) => this.handleClick(i)}
+            />
           </div>
           <div className="game-info">
-            <div>{/* status */}</div>
-            <ol>{/* TODO */}</ol>
+            <div>{status}</div>
+            <ol>{moves}</ol>
           </div>
         </div>
       );
     }
   }
   
+  
   // ========================================
   
   const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(<Game />);
   
+  //Helper function to check if the game has been won
+  function calculateWinner(squares) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        return squares[a];
+      }
+    }
+    return null;
+  }
