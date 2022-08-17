@@ -4,14 +4,40 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 
-//Function component
-function Square(props){
-  return(
-    <button className="square" onClick={props.onClick}> 
-      {props.value}
-    </button> //Shows the value passed to the square in the parent Board component. Adds an OnClick event for the squares
-  );
-}
+  //Function component
+  function Square(props){
+    return(
+      <button className="square" onClick={props.onClick}> 
+        {props.value}
+      </button> //Shows the value passed to the square in the parent Board component. Adds an OnClick event for the squares
+    );
+  }
+
+  class InteractiveTitle extends React.Component{
+    state = {
+      name: ""
+    }
+
+    handleInput = event => {
+      this.setState({ name: event.target.value});
+    }
+
+    logValue = () => {
+      console.log(this.state.name);
+    }
+    
+    render(){
+
+      return (
+        <div>
+          <h1>Welcome to tic-tac-toe</h1>
+          {/* <input onChange={this.handleInput} placeholder='Enter your name' />
+          <button>Log value</button>  */}
+          <br/>
+        </div>
+      );
+    }
+  }
   
   class Board extends React.Component {
 
@@ -108,16 +134,25 @@ function Square(props){
 
       return (
         <div className="game">
-          <div className="game-board">
-            <Board 
-              squares={current.squares}
-              onClick={(i) => this.handleClick(i)}
+
+          <div className='container'>
+            <InteractiveTitle
             />
           </div>
-          <div className="game-info">
-            <div>{status}</div>
-            <ol>{moves}</ol>
+
+          <div className='container' id="game-container">
+            <div className="game-board">
+              <Board 
+                squares={current.squares}
+                onClick={(i) => this.handleClick(i)}
+              />
+            </div>
+            <div className="game-info">
+              <div>{status}</div>
+              <ol>{moves}</ol>
+            </div>
           </div>
+          
         </div>
       );
     }
@@ -129,6 +164,8 @@ function Square(props){
   const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(<Game />);
   
+  // ========================================
+
   //Helper function to check if the game has been won
   function calculateWinner(squares) {
     const lines = [
