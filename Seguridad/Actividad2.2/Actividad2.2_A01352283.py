@@ -1,4 +1,5 @@
 from langdetect import detect, detect_langs # Used to help detect if the cypher makes sense by detecting the possible language of the message
+import random #To select random letters from the alphabet to make the OTP message and key
 from collections import Counter # Data structure to keep track of letters. It's a map that counts key repetitions.
 
 # Abecedario: "abcdefghijklmnopqrstuvwxyz " (el espacio cuenta)
@@ -153,7 +154,7 @@ def descifradoVigenere(msg, visualAid=False):
     baseAlphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ']
     msg = msg.lower() #Turns the message to lowercase
     msg = list(msg) #Converts the message string into a list of characters
-    msgLen = len(msg) #Length of the message in characters
+    #msgLen = len(msg) #Length of the message in characters
     print("______________________________________")
 
     keyDicts = [[], [], [], []] #Divides the message into 4, (cause the message uses 4 keys, cause the teacher told us lol)
@@ -215,6 +216,28 @@ def descifradoVigenere(msg, visualAid=False):
     
     return newMsg
 
+def cifradoOTP(msg, visualAid=False):
+    baseAlphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ']
+    
+    key = ""
+    newMsg = ""
+    for currentChar in msg:
+        #Make the temo newAlphabet
+        currentKeyChar = random.randint(0, len(baseAlphabet) - 1) #Picks a random letter from the base alphabet
+        
+        #Make a temp new alphabet (kinda inefficient, since the alphabets will eventaully be reused)
+        tempNewAlph = baseAlphabet[currentKeyChar:] + baseAlphabet[:currentKeyChar]
+
+
+        #Make the message
+        newMsg += tempNewAlph[baseAlphabet.index(currentChar)]
+
+        #Add the keyChar to the key
+        key += tempNewAlph[0]
+
+    print("Message: " + newMsg)
+
+    return key
 
 # ========================Auxiliary Functions======================== #
 
@@ -294,5 +317,6 @@ def cipher2(visualAid=False):
 #cipher1(True) #Deciphers cipher1.txt
 #testVigenereCipher()
 #testVigenereCipherDecript()
-cipher2(False) #Deciphers cipher2.txt
+#cipher2(False) #Deciphers cipher2.txt
 #print(cifradoCesar('d', ' zorro', True))
+print("Otp key: " + cifradoOTP("este es el ultimo mensaje que voy a cifrar voy a usar el one time pad asi que la llave es al azar"))
