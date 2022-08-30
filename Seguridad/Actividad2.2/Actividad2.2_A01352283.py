@@ -17,7 +17,7 @@ def cifradoCesar(key, msg, visualAid=False):
     msg = msg.lower()
 
     #Converts the message string into a list of characters
-    msg = list(msg)
+    #msg = list(msg)
         
     #Gets the index of the letter in order to get the number of positions the cypher has to move
     keyIndexInAlphabet = baseAlphabet.index(key)
@@ -68,7 +68,7 @@ def descifradoCesar(msg, visualAid=False):
         print(f"Repetition count \n{letterCounter}")
         print(f"\nRepetition percentages {letterCounterPercentage}\n")
 
-    iterations = 0
+    iterations = 0 #Shows up in visual aid, keeps count the times the algorithm checked for keys
     #Moves through the most common letters of the cypher by descending order
     for dictKey in letterCounter.most_common():
         newMsg = "" #String containing the possible deciphered message
@@ -78,10 +78,8 @@ def descifradoCesar(msg, visualAid=False):
         
         #Moves through the encrypted message
         for currentChar in msg: #Iterates thourg each character of the encrypted message
-            for i in range(len(newAlphabet)): #Iterates through the current shifted alfabet
-                if newAlphabet[i] == currentChar: #If the current char of the message matches the character in the current index of the shifted alphabet
-                    newMsg += baseAlphabet[i] #Add the letter in the index of the base alphabet, based on the index of the matched letter in the shifted alphabet
-                    break
+            #Build the new message based on the index of the current character in the new alphabet, matched with the base alphabet
+            newMsg += baseAlphabet[newAlphabet.index(currentChar)]
         
         detectedLan = detect(newMsg) #Detects the language of the message so you don't have to check each one
         #If the language detection library detects a language
@@ -158,7 +156,65 @@ def descifradoVigenere(msg, visualAid=False):
     msgLen = len(msg) #Length of the message in characters
     print("______________________________________")
 
+    keyDicts = [[], [], [], []] #Divides the message into 4, (cause the message uses 4 keys, cause the teacher told us lol)
+    keyDictsCounter = [Counter({}), Counter({}), Counter({}), Counter({})] #Counts character repetitions in each of the 4 messages
+
+    currentKey = 0 #It's used to keep track of which key we are analysing. (0 to 3 in this case because we were told the length of the key is 4)
+    #Iterates through the message to divide it in 4
+    for currentChar in msg:
+        keyDicts[currentKey].append(currentChar) #Builds the list of characters for each key (fixed to 4 keys in this case)
+        keyDictsCounter[currentKey].update(currentChar) #Counts the characters of each key (fixed to 4 keys in this case)
+        if currentKey >= 3: #Returns to the first dictionary
+            currentKey = 0
+        elif currentKey >= 0 and currentKey < 3: #If it's counting through dicts 0 to 3
+            currentKey += 1
+        else: #Something weird happened
+            print(f"Wtf happened to the counter. Counter: {currentKey}")
+            break
     
+    #Shows the counts for each character
+    if visualAid:
+        print("Counts for each character")
+        for i in range(len(keyDictsCounter)):
+            print(keyDictsCounter[i])    
+
+    #Rebuild the message
+    #Start building the keys first
+    newDicts = [[],[],[],[]]
+    #Get the shift amount
+    currentKeyPos = 0 #Keeps track of the current key being analyzed in the message (fixed to 4 keys in this case)
+    for currentRepList in keyDictsCounter: #Goes through the 4 repetition counters
+        shiftAmount = baseAlphabet.index(currentRepList.most_common()[0][0]) + 1 #Aligns the " " char with the most repeated, for each alphabet (brute force matching with " ")
+        newDicts[currentKeyPos].append(baseAlphabet[shiftAmount:] + baseAlphabet[:shiftAmount])
+        if currentKeyPos >= 3: #Returns to the first dictionary
+            currentKeyPos = 0
+        elif currentKeyPos >= 0 and currentKeyPos < 3: #If it's counting through dicts 0 to 3
+            currentKeyPos += 1
+        else: #Something weird happened
+            print(f"Wtf happened to the counter. Counter: {currentKeyPos}")
+            break
+
+    key = ""
+    for i in newDicts:
+        if visualAid:
+            print(i)
+        key += i[0][0]
+    print(f"Key: {key}")
+
+    newMsg = ""
+    currentKeyPos = 0
+    for i in msg:
+        newMsg += baseAlphabet[newDicts[currentKeyPos][0].index(i)]
+        if currentKeyPos >= 3: #Returns to the first dictionary
+            currentKeyPos = 0
+        elif currentKeyPos >= 0 and currentKeyPos < 3: #If it's counting through dicts 0 to 3
+            currentKeyPos += 1
+        else: #Something weird happened
+            print(f"Wtf happened to the counter. Counter: {currentKeyPos}")
+            break
+    
+    return newMsg
+
 
 # ========================Auxiliary Functions======================== #
 
@@ -176,7 +232,7 @@ def doAlph(ogAlph):
 def buildMsgFromTxt(txtFileName):
     wholeString = ""
     
-    with open('.\cipher1.txt') as f:
+    with open(txtFileName) as f:
         wholeString = f.readlines()
         f.close()
     
@@ -204,10 +260,10 @@ def test2(visualAid=False):
 
 def testVigenereCipher(visualAid=False):
     print("Encrypted message: " + cifradoVigenere("gkoy", "este es un texto cifrado para el segundo ejercicio que usa otro cifrado", visualAid))
-    print("Encrypted message: " + cifradoVigenere("llave", "jajaja este es un texto cifrado con la palabra llave que contiene la palabra llave espero no sea dificil de descifrar", visualAid))
+    #print("Encrypted message: " + cifradoVigenere("llave", "jajaja este es un texto cifrado con la palabra llave que contiene la palabra llave espero no sea dificil de descifrar", visualAid))
 
 def testVigenereCipherDecript(visualAid=False):
-    descifradoVigenere('uljvnlkemxpkemdey nihdougtqrvhzkcirkwautlwawvlklfefp kypkcirdtehikwautlwawvlklfefp zw pridyz milkdcjtnifdop yicni vlb', visualAid)
+    descifradoVigenere('kbgbfofx xnqkgglfmwcxkrlfzoogjsifbsd xrlfoxbxmw oynn onryknlzabxistognb', visualAid)
 
 #Tests the functions for all excercises
 def testAll(visualAid=False):
@@ -223,9 +279,20 @@ def cipher1(visualAid=False):
     decryptedTxt = open('decryptedCipher1.txt', "w+")
     decryptedTxt.write(newMsg)
 
+def cipher2(visualAid=False):
+    wholeString = buildMsgFromTxt('cipher2.txt')
+    newMsg = descifradoVigenere(wholeString, visualAid)
+
+    #Makes a txt with the solution of the first cypher
+    decryptedTxt = open('decryptedCipher2.txt', "w+")
+    decryptedTxt.write(newMsg)
+
+
 #testAll(False)
-#test1(True)
-#test2(True)
+#test1(True) #Cesar cipher
+#test2(True) #Cesar decipher
+#cipher1(True) #Deciphers cipher1.txt
 #testVigenereCipher()
-#cipher1(False)
+#testVigenereCipherDecript()
+cipher2(False) #Deciphers cipher2.txt
 #print(cifradoCesar('d', ' zorro', True))
