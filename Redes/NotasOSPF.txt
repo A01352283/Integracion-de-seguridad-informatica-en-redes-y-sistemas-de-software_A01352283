@@ -1,0 +1,6 @@
+Comandos:
+- Network <dirección ip> <wildcard> area <área>
+- Passive-interface <interfaz>
+- Default-information originate
+- sho ip ospf neighbor
+- sho ip ospf database

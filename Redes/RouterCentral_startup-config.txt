@@ -1,0 +1,169 @@
+!
+version 12.2
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname RouterCentral
+!
+!
+!
+enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+!
+!
+ip dhcp excluded-address 192.168.3.17
+ip dhcp excluded-address 192.168.3.25
+ip dhcp excluded-address 192.168.3.33
+ip dhcp excluded-address 192.168.3.41
+ip dhcp excluded-address 192.168.3.49
+ip dhcp excluded-address 192.168.3.57
+ip dhcp excluded-address 192.168.3.65
+ip dhcp excluded-address 192.168.3.73
+ip dhcp excluded-address 192.168.3.1
+ip dhcp excluded-address 192.168.3.81
+!
+ip dhcp pool equipo1
+ network 192.168.3.16 255.255.255.248
+ default-router 192.168.3.17
+ dns-server 162.16.56.254
+ip dhcp pool equipo2
+ network 192.168.3.24 255.255.255.248
+ default-router 192.168.3.25
+ dns-server 162.16.56.254
+ip dhcp pool equipo3
+ network 192.168.3.32 255.255.255.248
+ default-router 192.168.3.33
+ dns-server 162.16.56.254
+ip dhcp pool equipo4
+ network 192.168.3.40 255.255.255.248
+ default-router 192.168.3.41
+ dns-server 162.16.56.254
+ip dhcp pool equipo5
+ network 192.168.3.48 255.255.255.248
+ default-router 192.168.3.49
+ dns-server 162.16.56.254
+ip dhcp pool equipo6
+ network 192.168.3.56 255.255.255.248
+ default-router 192.168.3.57
+ dns-server 162.16.56.254
+ip dhcp pool equipo7
+ network 192.168.3.64 255.255.255.248
+ default-router 192.168.3.65
+ dns-server 162.16.56.254
+ip dhcp pool equipo8
+ network 192.168.3.72 255.255.255.248
+ default-router 192.168.3.73
+ dns-server 162.16.56.254
+ip dhcp pool entrenadores
+ network 192.168.3.0 255.255.255.240
+ default-router 192.168.3.1
+ dns-server 162.16.56.254
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+username ICPCadmin privilege 15 secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain-lookup
+ip domain-name ICPC3
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.3.17 255.255.255.248
+!
+interface GigabitEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.3.25 255.255.255.248
+!
+interface GigabitEthernet0/0.30
+ encapsulation dot1Q 30
+ ip address 192.168.3.33 255.255.255.248
+!
+interface GigabitEthernet0/0.40
+ encapsulation dot1Q 40
+ ip address 192.168.3.41 255.255.255.248
+!
+interface GigabitEthernet0/0.50
+ encapsulation dot1Q 50
+ ip address 192.168.3.49 255.255.255.248
+!
+interface GigabitEthernet0/0.60
+ encapsulation dot1Q 60
+ ip address 192.168.3.57 255.255.255.248
+!
+interface GigabitEthernet0/0.70
+ encapsulation dot1Q 70
+ ip address 192.168.3.65 255.255.255.248
+!
+interface GigabitEthernet0/0.80
+ encapsulation dot1Q 80
+ ip address 192.168.3.73 255.255.255.248
+!
+interface GigabitEthernet0/0.90
+ encapsulation dot1Q 90
+ ip address 192.168.3.1 255.255.255.240
+!
+interface GigabitEthernet0/0.100
+ encapsulation dot1Q 100
+ ip address 192.168.3.81 255.255.255.252
+!
+interface GigabitEthernet1/0
+ ip address 192.168.255.253 255.255.255.252
+ duplex auto
+ speed auto
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 192.168.255.254 
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ password 7 0822455D0A16
+ logging synchronous
+ login
+!
+line aux 0
+!
+line vty 0 4
+ password 7 0822455D0A16
+ login local
+ transport input ssh
+line vty 5 10
+ password 7 0822455D0A16
+ login local
+ transport input ssh
+!
+!
+!
+end
+

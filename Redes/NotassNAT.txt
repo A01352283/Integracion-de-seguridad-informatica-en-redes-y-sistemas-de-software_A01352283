@@ -1,0 +1,8 @@
+Para indicar el NAT en un router, se tiene que indicar cuál es la interfaz de afuera y adentro
+
+int (interfaz)
+ip nat inside source static
+
+
+PAT - Port address translation
+

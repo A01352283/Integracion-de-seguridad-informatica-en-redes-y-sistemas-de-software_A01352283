@@ -314,9 +314,12 @@ def cipher2(visualAid=False):
 #testAll(False)
 #test1(True) #Cesar cipher
 #test2(True) #Cesar decipher
-#cipher1(True) #Deciphers cipher1.txt
+cipher1(True) #Deciphers cipher1.txt
 #testVigenereCipher()
 #testVigenereCipherDecript()
 #cipher2(False) #Deciphers cipher2.txt
 #print(cifradoCesar('d', ' zorro', True))
-print("Otp key: " + cifradoOTP("este es el ultimo mensaje que voy a cifrar voy a usar el one time pad asi que la llave es al azar"))
+#print("Otp key: " + cifradoOTP("este es el ultimo mensaje que voy a cifrar voy a usar el one time pad asi que la llave es al azar"))
+
+#print(cifradoCesar("b","Hello world", True))
+#descifradoCesar("ifmmpaxpsme", True)
