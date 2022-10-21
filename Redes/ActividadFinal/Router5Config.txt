@@ -1,0 +1,96 @@
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int s0/1/0
+Router(config-if)#ip ad
+Router(config-if)#ip address 10.0.60.9 255.255.255.252
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface Serial0/1/0, changed state to up
+
+Router(config-if)#
+Router#
+%SYS-5-CONFIG_I: Configured from console by console
+
+Router#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/1/0, changed state to up
+
+Router#ping 10.0.60.10
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.0.60.10, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 2/23/41 ms
+
+Router#
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#no ip domain lookup
+Router(config)#int g0/0/0
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/0, changed state to up
+
+Router(config-if)#int g0/0/0.50
+Router(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/0.50, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/0.50, changed state to up
+
+Router(config-subif)#enc
+Router(config-subif)#encapsulation dot1q 50
+Router(config-subif)#ip address 10.0.48.1 255.255.248.0
+Router(config-subif)#int g0/0/0.60
+Router(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/0.60, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/0.60, changed state to up
+
+Router(config-subif)#enc
+Router(config-subif)#encapsulation dot1q 60
+Router(config-subif)#ip address 10.0.56.1 255.255.252.0
+Router(config-subif)#ip dhcp pool red8
+Router(dhcp-config)#network 10.0.48.0 255.255.248.0
+Router(dhcp-config)#def
+Router(dhcp-config)#default-router 10.0.48.1
+Router(dhcp-config)#ip dhcp excluded-address 10.0.48.1
+Router(config)#ip dhcp pool red9
+Router(dhcp-config)#ip address 10.0.56.0 255.255.252.0
+                    ^
+% Invalid input detected at '^' marker.
+	
+Router(dhcp-config)#network 10.0.56.0 255.255.252.0
+Router(dhcp-config)#def
+Router(dhcp-config)#default-router 10.0.56.1
+Router(dhcp-config)#ip dhcp excluded-address 10.0.56.1
+Router(config)#
+Router>en
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#router eigrp 1
+Router(config-router)#network 10.0.60.8 255.255.255.252
+Router(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 1: Neighbor 10.0.60.10 (Serial0/1/0) is up: new adjacency
+Router(config)#ip access-list extended rule50
+Router(config-ext-nacl)#deny ip 10.0.0.0 0.0.15.255 10.0.6.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.16.0 0.0.15.255 10.0.0.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.32.0 0.0.7.255 10.0.0.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.40.0 0.0.7.255 10.0.0.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.56.0 0.0.3.255 10.0.0.0 0.0.15.255
+Router(config-ext-nacl)#permit ip any any
+Router(config-ext-nacl)#ip access-list extended rule60
+Router(config-ext-nacl)#deny ip 10.0.0.0 0.0.15.255 10.0.6.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.16.0 0.0.15.255 10.0.0.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.32.0 0.0.7.255 10.0.0.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.40.0 0.0.7.255 10.0.0.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.48.0 0.0.7.255 10.0.0.0 0.0.15.255
+Router(config-ext-nacl)#pemit ip any any
+                          ^
+% Invalid input detected at '^' marker.
+	
+Router(config-ext-nacl)#permit ip any any
+Router(config-ext-nacl)#
+

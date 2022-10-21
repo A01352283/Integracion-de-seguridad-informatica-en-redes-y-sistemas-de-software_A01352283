@@ -1,0 +1,127 @@
+SwitchCentral(config)#vlan 10
+SwitchCentral(config-vlan)#name equipo1
+SwitchCentral(config-vlan)#vlan 20
+SwitchCentral(config-vlan)#name equipo2
+SwitchCentral(config-vlan)#vlan 30
+SwitchCentral(config-vlan)#name
+SwitchCentral(config-vlan)#name equi
+SwitchCentral(config-vlan)#name equipo3
+SwitchCentral(config-vlan)#vlan 40
+SwitchCentral(config-vlan)#name equipo4
+SwitchCentral(config-vlan)#vlan 50
+SwitchCentral(config-vlan)#name equipo5
+SwitchCentral(config-vlan)#vlan 60
+SwitchCentral(config-vlan)#name equipo6
+SwitchCentral(config-vlan)#vlan 70
+SwitchCentral(config-vlan)#name equipo7
+SwitchCentral(config-vlan)#vlan 80
+SwitchCentral(config-vlan)#name equipo8
+SwitchCentral(config-vlan)#vlan 90
+SwitchCentral(config-vlan)#name entrenadores
+SwitchCentral(config-vlan)#vlan 100
+SwitchCentral(config-vlan)#name administrador
+
+SwitchCentral(config-vlan)#int g0/1
+SwitchCentral(config-if)#sw
+SwitchCentral(config-if)#switchport mode trunk
+
+SwitchCentral(config-if)#exit
+SwitchCentral(config)#int f0/1
+SwitchCentral(config-if)#siw
+SwitchCentral(config-if)#swi
+SwitchCentral(config-if)#switchport mode access
+SwitchCentral(config-if)#sw
+SwitchCentral(config-if)#switchport ac
+SwitchCentral(config-if)#switchport access vlan 10
+SwitchCentral(config-if)#int f0/2
+SwitchCentral(config-if)#sw
+SwitchCentral(config-if)#switchport mode a
+SwitchCentral(config-if)#switchport mode access 
+%CDP-4-NATIVE_VLAN_MISMATCH: Native VLAN mismatch discovered on FastEthernet0/1 (10), with Switch FastEthernet0/1 (1).
+
+SwitchCentral(config-if)#switchport mode access 
+SwitchCentral(config-if)#
+%CDP-4-NATIVE_VLAN_MISMATCH: Native VLAN mismatch discovered on FastEthernet0/1 (10), with Switch FastEthernet0/1 (1).
+
+SwitchCentral(config-if)#sw
+SwitchCentral(config-if)#switchport acc
+SwitchCentral(config-if)#switchport access v
+SwitchCentral(config-if)#switchport access vlan 20
+
+SwitchCentral(config)#int f0/3
+SwitchCentral(config-if)#sw
+SwitchCentral(config-if)#switchport mode
+SwitchCentral(config-if)#switchport mode acc
+SwitchCentral(config-if)#switchport mode access 
+SwitchCentral(config-if)#sw
+SwitchCentral(config-if)#switchport acc
+SwitchCentral(config-if)#switchport access vl
+SwitchCentral(config-if)#switchport access vlan 30
+
+SwitchCentral(config-if)#int f0/4
+SwitchCentral(config-if)#sw
+SwitchCentral(config-if)#switchport mode
+SwitchCentral(config-if)#switchport mode c
+SwitchCentral(config-if)#switchport mode ac
+SwitchCentral(config-if)#switchport mode access v
+SwitchCentral(config-if)#switchport mode access vl
+SwitchCentral(config-if)#switchport mode access
+SwitchCentral(config-if)#sw
+SwitchCentral(config-if)#switchport ac
+SwitchCentral(config-if)#switchport access v
+SwitchCentral(config-if)#switchport access vlan 40
+
+SwitchCentral(config-if)#switchport access vlan 50
+SwitchCentral(config-if)#int f0/5
+SwitchCentral(config-if)#switchport mode access 
+
+SwitchCentral(config-if)#int f0/6
+SwitchCentral(config-if)#switchport mode access 
+SwitchCentral(config-if)#switchport access vlan 60
+
+SwitchCentral(config-if)#int f0/7
+SwitchCentral(config-if)#switchport mode access 
+SwitchCentral(config-if)#switchport access vlan 70
+
+SwitchCentral(config-if)#int f0/8
+SwitchCentral(config-if)#switchport mode access 
+SwitchCentral(config-if)#switchport access vlan 80
+
+SwitchCentral(config-if)#int f0/9
+SwitchCentral(config-if)#switchport mode access 
+SwitchCentral(config-if)#switchport access vlan 90
+
+SwitchCentral(config-if)#int f0/10
+SwitchCentral(config-if)#switchport mode access 
+SwitchCentral(config-if)#switchport access vlan 100
+
+SwitchCentral(config-if)#int f0/4
+SwitchCentral(config-if)#sw
+SwitchCentral(config-if)#switchport mode
+SwitchCentral(config-if)#switchport mode acc
+SwitchCentral(config-if)#switchport mode access 
+SwitchCentral(config-if)#sw
+SwitchCentral(config-if)#no sw
+SwitchCentral(config-if)#no switchport ac
+SwitchCentral(config-if)#no switchport access vl
+SwitchCentral(config-if)#no switchport access vlan 50
+SwitchCentral(config-if)#sw
+SwitchCentral(config-if)#switchport ac
+SwitchCentral(config-if)#switchport access vl
+SwitchCentral(config-if)#switchport access vlan 40
+SwitchCentral(config-if)#int 5/0
+                          ^
+% Invalid input detected at '^' marker.
+	
+SwitchCentral(config-if)#int f5/0
+%Invalid interface type and number
+SwitchCentral(config)#int f0/5
+SwitchCentral(config-if)#sw
+SwitchCentral(config-if)#switchport acc
+SwitchCentral(config-if)#switchport mode
+SwitchCentral(config-if)#switchport mode ac
+SwitchCentral(config-if)#switchport mode access 
+SwitchCentral(config-if)#sw
+SwitchCentral(config-if)#switchport ac
+SwitchCentral(config-if)#switchport access vl
+SwitchCentral(config-if)#switchport access vlan 50

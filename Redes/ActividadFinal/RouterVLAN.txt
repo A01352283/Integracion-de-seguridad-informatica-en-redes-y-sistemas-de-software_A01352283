@@ -1,0 +1,134 @@
+RouterCentral(config)#int g0/0
+RouterCentral(config-if)#no shut
+
+RouterCentral(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to up
+
+RouterCentral(config-if)#int g0/0.10
+RouterCentral(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0.10, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0.10, changed state to up
+
+RouterCentral(config-subif)#enc
+RouterCentral(config-subif)#encapsulation do
+RouterCentral(config-subif)#encapsulation dot1Q 10
+RouterCentral(config-subif)#ip add
+RouterCentral(config-subif)#ip address 192.168.3.17
+% Incomplete command.
+RouterCentral(config-subif)#ip address 192.168.3.17 255.255.255.248
+RouterCentral(config-subif)#g0/0.20
+                            ^
+% Invalid input detected at '^' marker.
+	
+RouterCentral(config-subif)#int g0/0.20
+RouterCentral(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0.20, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0.20, changed state to up
+
+RouterCentral(config-subif)#enc
+RouterCentral(config-subif)#encapsulation dot
+RouterCentral(config-subif)#encapsulation dot1Q 20
+RouterCentral(config-subif)#ip add
+RouterCentral(config-subif)#ip address 192.168.3.25 255.255.255.248
+RouterCentral(config-subif)#int g0/0.30
+RouterCentral(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0.30, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0.30, changed state to up
+
+RouterCentral(config-subif)#enc
+RouterCentral(config-subif)#encapsulation dor
+RouterCentral(config-subif)#encapsulation dot
+RouterCentral(config-subif)#encapsulation dot1Q 30
+RouterCentral(config-subif)#ip add
+RouterCentral(config-subif)#ip address 192.168.3.33 255.255.255.248
+RouterCentral(config-subif)#int g0/0.40
+RouterCentral(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0.40, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0.40, changed state to up
+
+RouterCentral(config-subif)#en
+RouterCentral(config-subif)#encapsulation do
+RouterCentral(config-subif)#encapsulation dot1Q 40
+RouterCentral(config-subif)#ip add
+RouterCentral(config-subif)#ip address 192.168.3.41 255.255.255.248
+RouterCentral(config-subif)#int g0/0.50
+RouterCentral(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0.50, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0.50, changed state to up
+
+RouterCentral(config-subif)#en
+RouterCentral(config-subif)#encapsulation dor
+RouterCentral(config-subif)#encapsulation do
+RouterCentral(config-subif)#encapsulation dot1Q 50
+RouterCentral(config-subif)#ip add
+RouterCentral(config-subif)#ip address 192.168.3.49 255.255.255.248
+RouterCentral(config-subif)#int g
+RouterCentral(config-subif)#int g0/0.60
+RouterCentral(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0.60, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0.60, changed state to up
+
+RouterCentral(config-subif)#en
+RouterCentral(config-subif)#encapsulation d
+RouterCentral(config-subif)#encapsulation dot1Q 60
+RouterCentral(config-subif)#ip 
+RouterCentral(config-subif)#ip a
+RouterCentral(config-subif)#ip ad
+RouterCentral(config-subif)#ip address 192.168.3.57 255.255.255.248
+RouterCentral(config-subif)#name Equipo6
+                             ^
+% Invalid input detected at '^' marker.
+	
+RouterCentral(config-subif)#int g0/0.70
+RouterCentral(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0.70, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0.70, changed state to up
+
+RouterCentral(config-subif)#en
+RouterCentral(config-subif)#encapsulation d
+RouterCentral(config-subif)#encapsulation dot1Q 70
+RouterCentral(config-subif)#ip add
+RouterCentral(config-subif)#ip address 192.168.3.65 255.255.255.248
+RouterCentral(config-subif)#int g0/0.80
+RouterCentral(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0.80, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0.80, changed state to up
+
+RouterCentral(config-subif)#enc
+RouterCentral(config-subif)#encapsulation d
+RouterCentral(config-subif)#encapsulation dot1Q 80
+RouterCentral(config-subif)#ip add
+RouterCentral(config-subif)#ip address 192.168.3.73 255.255.255.248
+RouterCentral(config-subif)#int g0/0.90
+RouterCentral(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0.90, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0.90, changed state to up
+
+RouterCentral(config-subif)#en
+RouterCentral(config-subif)#encapsulation d
+RouterCentral(config-subif)#encapsulation dot1Q 90
+RouterCentral(config-subif)#ip ad
+RouterCentral(config-subif)#ip address 192.168.3.1 255.255.255.240
+RouterCentral(config-subif)#int g0/0.100
+RouterCentral(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0.100, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0.100, changed state to up
+
+RouterCentral(config-subif)#en
+RouterCentral(config-subif)#encapsulation d
+RouterCentral(config-subif)#encapsulation dot1Q 100
+RouterCentral(config-subif)#ip add
+RouterCentral(config-subif)#ip address 192.168.3.81 255.255.255.252
+RouterCentral(config-subif)#exit

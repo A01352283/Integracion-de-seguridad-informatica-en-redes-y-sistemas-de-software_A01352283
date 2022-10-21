@@ -1,0 +1,207 @@
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int s0/1/0
+Router(config-if)#ip ad
+Router(config-if)#ip address 10.0.60.1 255.255.255.252
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface Serial0/1/0, changed state to up
+
+Router(config-if)#
+Router#
+%SYS-5-CONFIG_I: Configured from console by console
+
+Router#ping 10.0.60.2
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/1/0, changed state to up
+
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.0.60.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 15/26/44 ms
+
+Router#
+Router(config)#int g0/0/0
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/0, changed state to up
+
+Router(config-if)#int g0/0/0.10
+Router(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/0.10, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/0.10, changed state to up
+
+Router(config-subif)#enc
+Router(config-subif)#encapsulation dot
+Router(config-subif)#encapsulation dot1Q 10
+Router(config-subif)#ip ad
+Router(config-subif)#ip address 10.0.0.1 255.255.240.0
+Router(config-subif)#int g0/0/0.20
+Router(config-subif)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/0.20, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/0.20, changed state to up
+
+Router(config-subif)#enc
+Router(config-subif)#encapsulation dot1
+Router(config-subif)#encapsulation dot1Q 20
+Router(config-subif)#ip ad
+Router(config-subif)#ip address 10.0.16.1 255.255.240.0
+Router(config-subif)#Router#config t
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#Enter configuration commands, one per line.  End with CNTL/Z.
+                       ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#Router(config)#int s0/1/0
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#Router(config-if)#ip ad
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#Router(config-if)#ip address 10.0.60.9 255.255.255.252
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#Router(config-if)#no shut
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#
+Router(config-subif)#Router(config-if)#
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#%LINK-5-CHANGED: Interface Serial0/1/0, changed state to up
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#
+Router(config-subif)#Router(config-if)#
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#Router#
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#%SYS-5-CONFIG_I: Configured from console by console
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#
+Router(config-subif)#Router#
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/1/0, changed state to up
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#
+Router(config-subif)#Router#ping 10.0.60.10
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#
+Router(config-subif)#Type escape sequence to abort.
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#Sending 5, 100-byte ICMP Echos to 10.0.60.10, timeout is 2 seconds:
+                      ^
+% Invalid input detected at '^' marker.
+	
+Router(config-subif)#!!!!!
+Router(config-subif)#Success rate is 100 percent (5/5), round-trip min/avg/max = 2/23/41 ms
+                      ^
+% Invalid input detected at '^' marker.
+Router(config-subif)#
+Router(config-subif)#ip dhcp pool red4
+Router(dhcp-config)#netw
+Router(dhcp-config)#network 10.0.0.0 255.255.240.0
+Router(dhcp-config)#default router 10.0.0.1
+                            ^
+% Invalid input detected at '^' marker.
+	
+Router(dhcp-config)#default-router 10.0.0.1
+Router(dhcp-config)#ip d
+Router(dhcp-config)#ip dhcp exluded-a
+Router(dhcp-config)#ip dhcp exluded-address 10.0.0.1
+                    ^
+% Invalid input detected at '^' marker.
+	
+Router(dhcp-config)#i
+Router(dhcp-config)#ip
+Router(dhcp-config)#ip dhcp exc
+Router(dhcp-config)#ip dhcp excluded-address 10.0.0.1
+Router(config)#
+Router(config)#ip dhcp pool red5
+Router(dhcp-config)#net
+Router(dhcp-config)#network 10.0.16.0 255.255.240.0
+Router(dhcp-config)#def
+Router(dhcp-config)#default-router 10.0.16.1
+Router(dhcp-config)#%DHCPD-4-PING_CONFLICT: DHCP address conflict:  server pinged 10.0.16.1.
+
+Router(dhcp-config)#ip dhcp ex
+Router(dhcp-config)#ip dhcp excluded-address 10.0.16.1
+Router(config)#
+Router(config)#router eigrp 1
+Router(config-router)#no a
+Router(config-router)#no auto-summary 
+Router(config-router)#net
+Router(config-router)#network 10.0.60.4 255.255.255.252
+Router(config-router)#red
+Router(config-router)#redistribute s
+Router(config-router)#redistribute static 
+Router(config)#no net
+Router(config)#no netw
+Router(config)#no rou
+Router(config)#no router ei
+Router(config)#no router eigrp 1
+Router(config)#router eigrp 1
+Router(config-router)#no au
+Router(config-router)#no auto-summary 
+Router(config-router)#re
+Router(config-router)#redistribute sta
+Router(config-router)#redistribute static 
+Router(config-router)#net
+Router(config-router)#network 10.0.60.0 255.255.255.252
+Router(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 1: Neighbor 10.0.60.2 (Serial0/1/0) is up: new adjacency
+
+Router(config-router)#
+Router(config)#ip ac
+Router(config)#ip access-list e
+Router(config)#ip access-list extended rule10
+Router(config-ext-nacl)#ip deny an
+Router(config-ext-nacl)#ip deny 10.0.16.0 0.0.15.255 10.0.0.0 0.0.15.255
+                        ^
+% Invalid input detected at '^' marker.
+	
+Router(config-ext-nacl)#deny ip 10.0.16.0 0.0.15.255 10.0.0.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.32.0 0.0.7.255 10.0.0.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.40.0 0.0.7.255 10.0.0.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.48.0 0.0.7.255 10.0.0.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.56.0 0.0.3.255 10.0.0.0 0.0.15.255
+Router(config-ext-nacl)#
+Router(config)#ip access-list extended rule20
+Router(config-ext-nacl)#
+Router(config-ext-nacl)#deny ip 10.0.0.0 0.0.15.255 10.0.6.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.32.0 0.0.7.255 10.0.6.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.40.0 0.0.7.255 10.0.6.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.48.0 0.0.7.255 10.0.6.0 0.0.15.255
+Router(config-ext-nacl)#deny ip 10.0.56.0 0.0.3.255 10.0.6.0 0.0.15.255
+Router(config-ext-nacl)#permit ip any any
+Router(config-ext-nacl)#ip access-list extended rule10
+Router(config-ext-nacl)#permit ip any any
+Router(config-ext-nacl)#

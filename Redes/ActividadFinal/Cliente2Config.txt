@@ -1,0 +1,51 @@
+Cliente2#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Cliente2(config)#no ip domain lookup
+Cliente2(config)#int g0/0/0
+Cliente2(config-if)#ip ad
+Cliente2(config-if)#ip address 100.150.200.2 255.255.255.0
+Cliente2(config-if)#no shut
+Cliente2(config-if)#int s0/1/0
+Cliente2(config-if)#ip ad
+Cliente2(config-if)#ip address 10.0.60.2 255.255.255.252
+Cliente2(config-if)#no shut
+
+%LINK-5-CHANGED: Interface Serial0/1/0, changed state to down
+Cliente2(config-if)#int ad
+Cliente2(config-if)#int add
+Cliente2(config-if)#int s0/1/1 10.0.60.6 255.255.255.252
+                     ^
+% Invalid input detected at '^' marker.
+	
+Cliente2(config-if)#int s0/1/1
+Cliente2(config-if)#ip ad
+Cliente2(config-if)#ip address 10.0.60.6 255.255.255.252
+Cliente2(config-if)#no shut
+
+%LINK-5-CHANGED: Interface Serial0/1/1, changed state to down
+Cliente2(config-if)#int s0/2/0
+Cliente2(config-if)#ip ad
+Cliente2(config-if)#ip address 10.0.60.10 255.255.255.252
+Cliente2(config-if)#no shut
+
+%LINK-5-CHANGED: Interface Serial0/2/0, changed state to down
+Cliente2(config-if)#
+Cliente2(config)#int s0/1/0
+Cliente2(config-if)#ip nat inside
+Cliente2(config-if)#int s0/1/1
+Cliente2(config-if)#ip nat inside
+Cliente2(config-if)#int s0/2/0
+Cliente2(config-if)#ip nat inside
+Cliente2(config-if)#int g0/0/0
+Cliente2(config-if)#ip nat outside
+Cliente2(config-if)#exit
+Cliente2(config)#router e
+Cliente2(config)#router eigrp 1
+Cliente2(config-router)#no aut
+Cliente2(config-router)#no auto-summary 
+Cliente2(config-router)#network 10.0.60.0 0.0.0.3
+Cliente2(config-router)#network 10.0.60.4 0.0.0.3
+Cliente2(config-router)#network 10.0.60.8 0.0.0.3
+Cliente2(config-router)#red
+Cliente2(config-router)#redistribute static
+Cliente2(config-router)#

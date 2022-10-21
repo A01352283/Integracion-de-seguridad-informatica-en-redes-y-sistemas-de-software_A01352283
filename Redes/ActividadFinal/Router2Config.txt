@@ -1,0 +1,52 @@
+Router>en
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#no ip domain lookup
+Router(config)#int g0/0/0
+Router(config-if)#ip add
+Router(config-if)#ip address 10.6.0.1 255.255.255.128
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/0, changed state to up
+
+Router(config-if)#exit
+Router(config)#ip dhcp pool red3
+Router(dhcp-config)#network 10.6.0.0 255.255.255.128
+Router(dhcp-config)#def
+Router(dhcp-config)#default-router 10.6.0.1
+Router(dhcp-config)#ip dhcp
+Router(dhcp-config)#ip dhcp ex
+Router(dhcp-config)#ip dhcp exc
+Router(dhcp-config)#ip dhcp excluded-address 10.6.0.1
+Router(config)#int s0/1/0
+Router(config-if)#ip ad
+Router(config-if)#ip address 10.6.0.138 255.255.255.252
+Router(config-if)#no shut
+
+%LINK-5-CHANGED: Interface Serial0/1/0, changed state to down
+Router(config-if)#
+Router(config)#router ospf 1
+Router(config-router)#network 10.6.0.0 0.0.0.127 area 1
+Router(config-router)#network 10.6.0.136 0.0.0.3 area1
+                                                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-router)#network 10.6.0.136 0.0.0.3 area 1
+Router(config-router)#
+Router>ping 10.4.0.2
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.4.0.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 23/28/45 ms
+
+Router>ping 10.0.0.2
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.0.0.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 15/21/31 ms
+

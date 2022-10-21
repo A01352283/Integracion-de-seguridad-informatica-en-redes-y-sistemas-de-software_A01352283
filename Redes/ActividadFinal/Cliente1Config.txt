@@ -1,0 +1,183 @@
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#no ip domain lookup
+Router(config)#int s0/1/0
+Router(config-if)#ip address 10.6.0.130 255.255.255.252
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface Serial0/1/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/1/0, changed state to up
+
+Router(config-if)#cpoy r
+Router(config-if)#copy r
+Router(config-if)#copy run
+Router(config-if)#exit
+Router(config)#cop
+Router(config)#copy r
+Router(config)#copy run
+Router(config)#
+Router#
+%SYS-5-CONFIG_I: Configured from console by console
+
+Router#cop
+Router#copy run
+Router#copy running-config st
+Router#copy running-config startup-config 
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+Router#int s0/1/1
+           ^
+% Invalid input detected at '^' marker.
+	
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int 0/1/1
+                   ^
+% Invalid input detected at '^' marker.
+	
+Router(config)#int s0/1/1
+Router(config-if)#ip 10.6.0.133 255.255.255.252
+                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config-if)#ip address 10.6.0.133 255.255.255.252
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface Serial0/1/1, changed state to up
+
+Router(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/1/1, changed state to up
+
+Router(config-if)#
+Router#
+%SYS-5-CONFIG_I: Configured from console by console
+in
+Translating "in"
+% Unknown command or computer name, or unable to find computer address
+
+Router#int s0/2/0
+           ^
+% Invalid input detected at '^' marker.
+	
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int s0/2/0
+Router(config-if)#ip add
+Router(config-if)#ip address 10.6.0.137 255.255.255.252
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface Serial0/2/0, changed state to up
+
+Router(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/2/0, changed state to up
+Router>en
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#router ospf 1
+Router(config-router)#network 10.6.0.128 0.0.0.3 area 1
+Router(config-router)#network 10.6.0.132 0.0.0.3 area 1
+01:06:06: %OSPF-5-ADJCHG: Process 1, Nbr 10.6.0.129 on Serial0/1/0 from LOADING to FULL, Loading Done
+
+Router(config-router)#network 10.6.0.132 0.0.0.3 area 1
+01:06:12: %OSPF-5-ADJCHG: Process 1, Nbr 10.6.0.134 on Serial0/1/1 fr
+Router(config-router)#network 10.6.0.136 0.0.0.3 area 1
+Router(config-router)#
+01:06:38: %OSPF-5-ADJCHG: Process 1, Nbr 10.6.0.138 on Serial0/2/0 from LOADING to FULL, Loading Done
+Router(config)#int g0/0/0
+Router(config-if)#no ip address 100.150.200.254
+% Incomplete command.
+Router(config-if)#no ip address 100.150.200.254 255.255.255.0
+Router(config-if)#ip add
+Router(config-if)#ip address 100.150.200.1 255.255.255.0
+Router(config-if)#no shut
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int s0/1/0
+Router(config-if)#ip n
+Router(config-if)#ip nat in
+Router(config-if)#ip nat inside 
+Router(config-if)#int g0/0/0
+Router(config-if)#ip nat outside
+Router(config-if)#int 0/1/1
+                   ^
+% Invalid input detected at '^' marker.
+	
+Router(config-if)#no ip nat outside
+Router(config-if)#
+Router#
+%SYS-5-CONFIG_I: Configured from console by console
+
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int 0/1/0
+                   ^
+% Invalid input detected at '^' marker.
+	
+Router(config)#int s0/1/0
+Router(config-if)#ip nat inside
+Router(config-if)#int g0/0/0
+Router(config-if)#ip nat outside
+Router(config-if)#int s0/1/1
+Router(config-if)#ip nat inside
+Router(config-if)#int 0/2/0
+                   ^
+% Invalid input detected at '^' marker.
+	
+Router(config-if)#int s0/2/0
+Router(config-if)#ip nat inside
+Router(config-if)#
+int s0/2/0
+Router(config-if)#ip nat inside source static tcp 10.6.0.2 80 100.150.200.1 80
+Router(config)#access-list 1 permit 10.0.0.0 255.252.0.0
+Router(config)#access-list 1 permit 10.4.0.0 255.254.0.0
+Router(config)#access-list 1 permit 10.6.0.0 255.255.255.128
+Router(config)#access-list 1 permit 10.6.0.128 255.255.255.252
+Router(config)#access-list 1 permit 10.6.0.132 255.255.255.252
+Router(config)#access-list 1 permit 10.6.0.136 255.255.255.252
+Router(config)#ip n
+Router(config)#ip na
+Router(config)#int g0/0/0
+Router(config-if)#ip n
+Router(config-if)#ip nat s
+Router(config-if)#ip nat in
+Router(config-if)#ip nat inside s
+Router(config-if)#ip nat inside so
+Router(config-if)#ip nat inside sou
+Router(config-if)#ip nat inside sour
+Router(config-if)#ip nat inside source l
+Router(config-if)#ip nat inside source list 1 in
+Router(config-if)#ip nat inside source list 1 interface int g0/0/0 overload
+                                ^
+% Invalid input detected at '^' marker.
+	
+Router(config-if)#exit
+Router(config)#ip nat inside source static tcp 
+Router(config)#ip nat inside source static tc
+Router(config)#ip nat inside source l
+Router(config)#ip nat inside source list 1 in
+Router(config)#ip nat inside source list 1 interface int g0/0/0 ov
+Router(config)#ip nat inside source list 1 interface int g0/0/0 ove
+Router(config)#ip nat inside source list 1 interface int g0/0/0 over
+Router(config)#ip nat inside source list 1 interface int g0/0/0 overload
+                                                     ^
+% Invalid input detected at '^' marker.
+	
+Router(config)#ip nat inside source list 1 interface g0/0/0 overload
+Router(config)#
+Router(config)#access-list 1 permit 10.0.0.0 0.3.255.255
+Router(config)#ac
+Router(config)#access-list 1 pe
+Router(config)#access-list 1 permit 10.4.0.0 0.1.255.255
+Router(config)#access-list 1 permit 10.6.0.0 0.0.0.127
+Router(config)#ac
+Router(config)#access-list 1 per
+Router(config)#access-list 1 permit 10.6.0.128 0.0.0.3
+Router(config)#access-list 1 permit 10.6.0.132 0.0.0.3
+Router(config)#access-list 1 permit 10.6.0.136 0.0.0.3
+Router(config)#
+

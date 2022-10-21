@@ -1,0 +1,86 @@
+Router>en
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#no ip domain lookup
+Router(config)#int g0/0/0
+Router(config-if)#ip address 10.0.0.1 255.252.0.0
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/0, changed state to up
+
+Router(config-if)#exit
+Router(config)#ip dhcp pool red2
+Router(dhcp-config)#net
+Router(dhcp-config)#network 10.0.0.0 255.252.0.0
+Router(dhcp-config)#defaul
+Router(dhcp-config)#default-router 10.0.0.1
+Router(dhcp-config)#ip dhcp exc
+Router(dhcp-config)#ip dhcp excl
+Router(dhcp-config)#ip dhcp exclu
+Router(dhcp-config)#ip dhcp excluded-address 10.0.0.1
+Router(config)#int s0/0/0
+%Invalid interface type and number
+Router(config)#int s0/1/0
+Router(config-if)#ip address 10.6.0.134 255.255.255.252
+Router(config-if)#no shut
+
+%LINK-5-CHANGED: Interface Serial0/1/0, changed state to down
+Router(config-if)#
+Router#
+%SYS-5-CONFIG_I: Configured from console by console
+
+Router#save s
+Router#cop
+Router#copy st
+Router#copy startup-config r
+Router#copy startup-config running-config 
+%% Non-volatile configuration memory invalid or not present
+Router#
+Router#copy st
+Router#copy startup-config r
+Router#copy startup-config running-config 
+%% Non-volatile configuration memory invalid or not present
+Router#
+%LINK-5-CHANGED: Interface Serial0/1/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/1/0, changed state to up
+
+Router#ping 10.6.0.133
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.6.0.133, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 6/18/28 ms
+Router(config)#router os
+Router(config)#router ospf 1
+Router(config-router)#net
+Router(config-router)#network 10.0.0.0 0.3.255.255 area 1
+Router(config-router)#network 10.6.0.132 0.0.0.3 area 1
+Router(config-router)#
+Router>ping 10.4.0.2
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.4.0.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 2/22/41 ms
+
+Router>ping 10.6.0.1
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.6.0.1, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 17/39/56 ms
+Router(config)#ip access-list ext
+Router(config)#ip access-list extended 2
+% Invalid access list name.
+Router(config)#ip access-list extended inDeny
+Router(config-ext-nacl)#deny ip 10.0.0.0 0.0.255.255 10.6.0.0 0.0.0.127
+Router(config-ext-nacl)#permit ip any any
+Router(config-ext-nacl)#exit
+Router(config)#int g0/0/0
+Router(config-if)#ip acc
+Router(config-if)#ip access-group inDeny in
+Router(config-if)#exit
